@@ -1,0 +1,15 @@
+<button href="test()" onClick="test()">Oluştur</button>
+<button onClick="ok()">Botu Başlat</button>
+<script>
+  const weky = require('weky');
+
+let randomNumber = weky.randomizeNumber(100,1000);
+
+//console.log(randomNumber);
+  function ok() {
+    process.exit(1);
+   } 
+  function test() {
+    res.json(`${randomNumber}`) 
+   } 
+  </script>
