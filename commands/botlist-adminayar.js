@@ -22,14 +22,14 @@ module.exports = {
       
       :x: Lütfen Belirli Argüman Belirtiniz! 
       
-      Kullanım: ${prefix}botlist-ayar [\`yetkili\`,\`log\`,\`başvuru-kanal\`,\`sertifika-kanal\`,\`sertifika-log\`] 
+      Kullanım: ${prefix}botlist-ayar [\`yetkili\`,\`log\`,\`embed\`,\`başvuru-kanal\`,\`sertifika-kanal\`,\`sertifika-log\`] 
   
     
       `
       )
       .setFooter(`${client.user.username} © ¦ BotList Sistemi V2`);
     if (!nicat) return message.reply(hataembed);
-    if (nicat !== "yetkili" && nicat !== "log" && nicat !== "başvuru-kanal" && nicat !== "sertifika-kanal" && nicat !== "sertifika-log") 
+    if (nicat !== "yetkili" && nicat !== "log" && nicat !== "embed" && nicat !== "başvuru-kanal" && nicat !== "sertifika-kanal" && nicat !== "sertifika-log") 
       return message.reply("Arguman belirt");
     // message.reply('t!')
     if (nicat == "yetkili") {
@@ -103,6 +103,34 @@ module.exports = {
           Kanal: <#${sertilog.id}>
       `) 
      } 
+if(nicat == "embed"){
+
+const karsilama = nicat.slice(1).join() || nicat[1];
+if(!karsilama) return message.channel.send(new Discord.MessageEmbed().setColor('RED').setTitle('HATA: 400').setDescription(`
+<:codesty_cross:844468546930606100> | Lütfen Bir Ayar Belirt! 
+  Var Olan Ayarlar: \`log-embed\`, \`sertifika-embed\`
+   <:INFO:795920163433086997> | Kullanım: \`${prefix}botlist-ayar embed [log-embed,sertifika-embed]\`
+`).setFooter(`Greedy© - All Rights Reserved!') 
+else if(nicat[2] == "log-embed") {
+const logrengi = nicat.slice(3).join()
+if(!logrengi) return message.channel.send(`
+<:codesty_cross:844468546930606100> | Lütfen Renk Belirtin! 
+ <:INFO:795920163433086997> | Veritabanında Kullanıla Bilen Renkler: \`RED,GREEN,BLACK,YELLOW,Hex Kodları\`
+  <:INFO:795920163433086997> | Kullanım: \`${prefix}botlist-ayar embed log-embed (Renk) 
+`) 
+db.set(`logembed_${message.guild.id}`, logrengi) 
+} 
+else if(nicat[2] == "sertifika-embed"){
+const sertifikaembed = nicat.slice(3).join()
+if(!sertifikaembed) return message.channel.send(`
+<:codesty_cross:844468546930606100> | Lütfen Renk Belirtin! 
+ <:INFO:795920163433086997> | Veritabanında Kullanıla Bilen Renkler: \`RED,GREEN,BLACK,YELLOW,Hex Kodları\`
+  <:INFO:795920163433086997> | Kullanım: \`${prefix}botlist-ayar embed sertifika-embed (Renk) 
+ 
+`) 
+db.set(`sertifikaembed_${message.guild.id}`, sertifikaembed) 
+} 
+} 
   },
 };
 
