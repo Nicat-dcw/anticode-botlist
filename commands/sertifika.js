@@ -13,6 +13,7 @@ module.exports = {
       const sertifikakanal = db.get(`sertifika-kanal_${message.guild.id}`) 
   if(message.channel.id !== sertifikakanal) return message.channel.send(`<#${sertifikakanal.id}> sadece bu kanalda kullanabılır.`)
 
+let embedkontrol = db.get(`sertifikaembed_${message.guild.id}`) 
 
 let botid = args[0]
 let prefix = args[1]
@@ -24,7 +25,7 @@ message.channel.send("✔ ¦ **Sertifika İsteğiniz Gönderildi Lütfen Bekleyi
   client.channels.cache.get(logu).send(``)
   
   let embed = new Discord.MessageEmbed()
-  .setColor("RANDOM")
+  .setColor(embedrenk)
 .setDescription(`
 Yeni Bir **Sertifika** Isteği! 
 > Bilgiler:
