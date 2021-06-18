@@ -11,6 +11,8 @@ module.exports = {
       const Data = require('plasma-db') 
       const db = new Data('./botlist.json') 
       let prefix = "!!";
+let embedrenk = db.get(`logembed_${message.guild.id}` || "RANDOM") 
+
       const eklemekanal = db.get(`botlistekleme_${message.guild.id}`)
 const modlogkanal = message.guild.channels.cache.find(kanal => kanal.id === eklemekanal);
     //  if(!message.channel.id !== eklemekanal) return;
@@ -41,7 +43,7 @@ if(!modlogkanal) return message.channel.send('HATA : 500 \n Ekleme Kanalı Ayarl
       const prefixi = db.get(`botprefix_${message.guild.id}`) 
       const onayi = db.get(`botonaydurum_${message.guild.id}`) 
       const lo = new Discord.MessageEmbed() 
-     .setColor('RANDOM') 
+     .setColor(embedrenk) 
      .setTitle('Başvuru') 
      .setDescription(`
      Sisteme Yeni Bir Başvuru Bilgisi Geldi! 
