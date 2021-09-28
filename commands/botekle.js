@@ -9,6 +9,7 @@ module.exports = {
    // message.reply('Pong!'). 
       const Discord = require('discord.js') 
       const Data = require('plasma-db') 
+      const disbut = require("discord-buttons") 
       const db = new Data('./botlist.json') 
       let prefix = "!!";
 let embedrenk = db.get(`logembed_${message.guild.id}` || "RANDOM") 
@@ -61,10 +62,47 @@ if(!modlogkanal) return message.channel.send('HATA : 500 \n Ekleme Kanalı Ayarl
      ID: ${basvuran} 
      \`\`\`
      
-    \` Bilgi: Botu Onaylamak Için ${prefix}bot onayla [id] \`
+    \` Bilgi: Botu Onaylamak Için ${prefix}bot onayla [id] veya Butonlara Tıklayınız! \`
      `) 
-      client.channels.cache.get(eklemekanal).send(lo)
-    },
+     const onayla = new disbut.MessageButton() 
+.setStyle("green")
+.setLabel("Botu Onayla") 
+.setID("onaylaa")
+
+const reddet = new disbut.MessageButton() 
+.setStyle("red")
+.setLabel("Botu Reddet") 
+.setID("redee")
+
+      client.channels.cache.get(eklemekanal).send('', {embed:lo, buttons: [onayla, reddet]})
+  client.on("clickButton", (button) => {
+if(button.id == "onaylaa"){
+      if(button.clicker.member.roles.cache.get(yetkili)) {
+      await button.think()
+db.add(`sıra_${message.guild.id}`, -1) 
+var sahipp = db.fetch(`basvuran_${message.guild.id}`) 
+   await button.reply.send("Botu Onayladınız! ")
+client.channel.cache.get(sahipp).send("**Botunuz Onaylandı! **")
+}else{
+await button.reply.send("Yetkiniz Yok!") 
+
+} 
+} 
+if(button.id == "redee"){
+      if(button.clicker.member.roles.cache.get(yetkili)) {
+    var sahipp = db.fetch(`basvuran_${message.guild.id}`) 
+  
+  await button.think()
+   await button.reply.send("Botu Reddetdiniz! ")
+   client.channel.cache.get(sahipp).send("**Botunuz Onaylandı! **")
+
+}else{
+await button.reply.send("Yetkiniz Yok!") 
+
+} 
+} 
+});
+  },
 
 };
 
