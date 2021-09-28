@@ -9,8 +9,10 @@ module.exports = {
    // message.reply('Pong!'). 
       const Discord = require('discord.js') 
       const Data = require('plasma-db') 
+
       const disbut = require("discord-buttons") 
-      const db = new Data('./botlist.json') 
+      const db = new Data('./botlist.json')
+var yetkiliaga = db.fetch(`botlistyetkilirol_${message.guild.id}`) 
       let prefix = "!!";
 let embedrenk = db.get(`logembed_${message.guild.id}` || "RANDOM") 
 
@@ -77,7 +79,7 @@ const reddet = new disbut.MessageButton()
       client.channels.cache.get(eklemekanal).send('', {embed:lo, buttons: [onayla, reddet]})
   client.on("clickButton", (button) => {
 if(button.id == "onaylaa"){
-      if(button.clicker.member.roles.cache.get(yetkili)) {
+      if(button.clicker.member.roles.cache.get(yetkiliaga)) {
       await button.think()
 db.add(`sıra_${message.guild.id}`, -1) 
 var sahipp = db.fetch(`basvuran_${message.guild.id}`) 
@@ -89,7 +91,7 @@ await button.reply.send("Yetkiniz Yok!")
 } 
 } 
 if(button.id == "redee"){
-      if(button.clicker.member.roles.cache.get(yetkili)) {
+      if(button.clicker.member.roles.cache.get(yetkiliaga)) {
     var sahipp = db.fetch(`basvuran_${message.guild.id}`) 
   
   await button.think()
